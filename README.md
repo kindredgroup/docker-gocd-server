@@ -6,7 +6,7 @@ This is a unofficial fork from: https://github.com/Travix-International/docker-g
 
 [![Stars](https://img.shields.io/docker/stars/unibet/gocd-server.svg)](https://hub.docker.com/r/unibet/gocd-server/)
 [![Pulls](https://img.shields.io/docker/pulls/unibet/gocd-server.svg)](https://hub.docker.com/r/unibet/gocd-server/)
-[![License](https://img.shields.io/github/license/unibet-/docker-gocd-server.svg)](https://github.com/unibet/docker-gocd-server/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/unibet/docker-gocd-server.svg)](https://github.com/unibet/docker-gocd-server/blob/master/LICENSE)
 
 # Usage
 
