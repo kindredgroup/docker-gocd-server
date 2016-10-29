@@ -6,7 +6,8 @@ RUN apk --update add \
   bash \
   curl \
   git \
-  subversion
+  subversion \
+  xmlstarlet
 
 # Add go user and group
 RUN addgroup -g 1000 go && adduser -u 1000 -h /var/lib/go-server -H -S -G go go
