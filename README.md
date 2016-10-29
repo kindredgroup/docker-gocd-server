@@ -19,7 +19,17 @@ docker run -t  \
 docker-compose.yml:
 
 ```
-TODO
+version: '2'
+services:
+  gocd-server:
+    build: .
+    ports:
+      - 8153:8153
+      - 8154:8154
+    volumes:
+      - ./go-data/etc:/etc/go
+      - ./go-data/lib:/var/lib/gocd-server
+      - ./go-data/log:/var/log/gocd-server
 ```
 
 
