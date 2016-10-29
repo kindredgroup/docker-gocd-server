@@ -2,7 +2,11 @@ FROM unibet/alpine-jre:7
 MAINTAINER karel.bemelmans@unibet.com
 
 # Install more apk packages we might need
-RUN apk --update add curl bash
+RUN apk --update add \
+  bash \
+  curl \
+  git \
+  subversion
 
 # Add go user and group
 RUN addgroup -g 1000 go && adduser -u 1000 -h /var/lib/go-server -H -S -G go go
