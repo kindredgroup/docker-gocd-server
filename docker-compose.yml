@@ -17,3 +17,6 @@ services:
     environment:
       - GO_SERVER_URL=https://gocd-server:8154
       - AGENT_KEY=secret-key
+      - AGENT_RESOURCES=docker
+      - AGENT_ENVIRONMENTS=prod
+      - AGENT_HOSTNAME=deploy-agent-01
