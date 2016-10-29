@@ -9,3 +9,11 @@ services:
       - ./go-data/etc:/etc/go
       - ./go-data/lib:/var/lib/gocd-server
       - ./go-data/log:/var/log/gocd-server
+    environment:
+      - AGENT_KEY=secret-key
+
+  gocd-agent:
+    image: unibet/gocd-agent
+    environment:
+      - GO_SERVER_URL=https://gocd-server:8154
+      - AGENT_KEY=secret-key
