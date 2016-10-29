@@ -6,6 +6,7 @@ set -e
 # own Docker image on top of this.
 #
 # Log to stdout instead of files
+if [ -d /etc/go ]; then
 cat >/etc/go/log4j.properties <<EOL
 log4j.rootLogger=WARN, ConsoleAppender
 log4j.logger.com.thoughtworks.go=INFO
@@ -27,34 +28,6 @@ log4j.appender.ShineConsoleAppender=org.apache.log4j.ConsoleAppender
 log4j.appender.ShineConsoleAppender.layout=org.apache.log4j.PatternLayout
 log4j.appender.ShineConsoleAppender.layout.conversionPattern=%d{ISO8601} %5p [%t] %c{1}:%L - %m%n
 EOL
-
-# Fix directory permissions if needed
-#
-# /var/lib/go-server
-if [ -d "/var/lib/go-server" ]
-then
-  echo "Setting owner for /var/lib/go-server..."
-  chown go:go /var/lib/go-server
-else
-  echo "Directory /var/lib/go-server does not exist"
-fi
-
-# /var/log/go-server
-if [ -d "/var/log/go-server" ]
-then
-  echo "Setting owner for /var/log/go-server..."
-  chown -R go:go /var/log/go-server
-else
-  echo "Directory /var/log/go-server does not exist"
-fi
-
-# /etc/go
-if [ -d "/etc/go" ]
-then
-  echo "Setting owner for /etc/go..."
-  chown -R go:go /etc/go
-else
-  echo "Directory /etc/go does not exist"
 fi
 
 # start go.cd server as go user

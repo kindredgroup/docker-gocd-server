@@ -2,10 +2,10 @@ FROM unibet/alpine-jre:7
 MAINTAINER karel.bemelmans@unibet.com
 
 # Install more apk packages we might need
-RUN apk --update add curl
+RUN apk --update add curl bash
 
 # Add go user and group
-RUN addgroup go && adduser -h /var/lib/go-server -H -S -G go go
+RUN addgroup -g 1000 go && adduser -u 1000 -h /var/lib/go-server -H -S -G go go
 
 # Install GoCD Server from zip file
 ARG GO_MAJOR_VERSION=16.11.0
@@ -21,15 +21,24 @@ RUN curl -L --silent https://download.go.cd/binaries/${GO_VERSION}/generic/go-se
   && chown -R go:go /usr/local/go-server-${GO_MAJOR_VERSION} \
   && rm /tmp/go-server.zip
 
+RUN mkdir -p /etc/default \
+  && cp /usr/local/go-server-${GO_MAJOR_VERSION}/go-server.default /etc/default/go-server \
+  && sed -i -e "s/DAEMON=Y/DAEMON=N/" /etc/default/go-server
+
+RUN mkdir /etc/go && chown go:go /etc/go \
+  && mkdir /var/lib/go-server && chown go:go /var/lib/go-server \
+  && mkdir /var/log/go-server && chown go:go /var/log/go-server
+
 # Expose ports needed
 EXPOSE 8153 8154
 
-# These are the 3 volumes we define
-# You should mount these as external mount points from the Docker host
-RUN mkdir -p /etc/go /var/lib/go-server /var/log/go-server
-VOLUME ['/var/lib/go-server', '/var/log/go-server', '/etc/go']
+VOLUME /etc/go
+VOLUME /var/lib/go-server
+VOLUME /var/log/go-server
 
 # add the entrypoint config and run it when we start the container
 COPY ./docker-entrypoint.sh /
-RUN chmod 500 /docker-entrypoint.sh
+RUN chown go:go /docker-entrypoint.sh && chmod 500 /docker-entrypoint.sh
+
+USER go
 ENTRYPOINT ["/docker-entrypoint.sh"]
