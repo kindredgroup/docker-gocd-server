@@ -2,7 +2,7 @@ FROM unibet/alpine-jre:7
 MAINTAINER karel.bemelmans@unibet.com
 
 # Install more apk packages we might need
-RUN apk --update add \
+RUN apk --no-cache --update add \
   bash \
   curl \
   git \
