@@ -55,6 +55,8 @@ services:
       - ./go-data/log:/var/log/gocd-server/log
     environment:
       - AGENT_KEY=VERYSECRETAGENTKEYLOLKTNXBYE
+      - GOCD_API_USERNAME=apiuser
+      - GOCD_API_PASSWORD=secret
 
   gocd-agent:
     image: unibet/gocd-agent
