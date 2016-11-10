@@ -45,7 +45,7 @@ docker-compose.yml that starts both the server and 1 agent:
 version: '2'
 services:
   gocd-server:
-    build: .
+    image: unibet/gocd-server
     ports:
       - 8153:8153
       - 8154:8154
@@ -66,4 +66,6 @@ services:
       - AGENT_RESOURCES=docker
       - AGENT_ENVIRONMENTS=prod
       - AGENT_HOSTNAME=deploy-agent-01
+    links:
+      - gocd-server
 ```
