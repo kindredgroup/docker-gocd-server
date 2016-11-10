@@ -34,7 +34,7 @@ fi
 #
 # Update it with the AGENT_KEY if needed, otherwise create a new clean config.
 if [ -f go-data/etc/cruise-config.xml ]; then
-  if [ -z "$AGENT_KEY" ]; then
+  if [ ! -z "$AGENT_KEY" ]; then
     xmlstarlet ed -u /cruise/server/@agentAutoRegisterKey -v ${AGENT_KEY} go-data/etc/cruise-config.xml
   fi
 else
@@ -52,7 +52,7 @@ fi
 
 # Create a password file that contains 1 entry for now.
 # We need this to be able to send API calls to the REST interface after the server has been booted
-if [ -z "$GOCD_API_USERNAME" ] && [ -z "$GOCD_API_PASSWORD" ]; then
+if [ ! -z "$GOCD_API_USERNAME" ] && [ ! -z "$GOCD_API_PASSWORD" ]; then
     echo "Updating /etc/go/passwd file with API user credentials..."
 
     if [ ! -f /etc/go/passwd ]; then
