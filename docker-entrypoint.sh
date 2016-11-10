@@ -35,9 +35,12 @@ fi
 # Update it with the AGENT_KEY if needed, otherwise create a new clean config.
 if [ -f /etc/go/cruise-config.xml ]; then
   if [ ! -z "$AGENT_KEY" ]; then
+    echo -n "Updating existing go-server configuration file with AGENT_KEY..."
     xmlstarlet ed --inplace -u /cruise/server/@agentAutoRegisterKey -v ${AGENT_KEY} /etc/go/cruise-config.xml
   fi
 else
+    echo -n "No go-server configuration file found, creating default config..."
+
 cat >/etc/go/cruise-config.xml <<EOL
 <?xml version="1.0" encoding="utf-8"?>
 <cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="87">
@@ -50,10 +53,12 @@ cat >/etc/go/cruise-config.xml <<EOL
 EOL
 fi
 
+echo " Done!"
+
 # Create a password file that contains 1 entry for now.
 # We need this to be able to send API calls to the REST interface after the server has been booted
 if [ ! -z "$GOCD_API_USERNAME" ] && [ ! -z "$GOCD_API_PASSWORD" ]; then
-    echo "Updating /etc/go/passwd file with API user credentials..."
+    echo -n "Updating /etc/go/passwd file with API user credentials..."
 
     if [ ! -f /etc/go/passwd ]; then
         htpasswd -b -s -c /etc/go/passwd ${GOCD_API_USERNAME} ${GOCD_API_PASSWORD}
