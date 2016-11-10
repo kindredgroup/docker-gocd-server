@@ -3,6 +3,7 @@ MAINTAINER karel.bemelmans@unibet.com
 
 # Install more apk packages we might need
 RUN apk --no-cache --update add \
+  apache2-utils \
   bash \
   curl \
   git \
