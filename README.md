@@ -11,8 +11,8 @@ docker run -t  \
   -p 8153:8153 \
   -p 8154:8154 \
   -v $(pwd)/go-data/etc:/etc/go \
-  -v $(pwd)/go-data/lib:/var/lib/go-server/lib \
-  -v $(pwd)/go-data/log:/var/log/go-server/log \
+  -v $(pwd)/go-data/lib:/var/lib/go-server \
+  -v $(pwd)/go-data/log:/var/log/go-server \
   -e "AGENT_KEY=VERYSECRETAGENTKEYLOLKTNXBYE" \
   -e "GOCD_API_USERNAME=apiuser" \
   -e "GOCD_API_PASSWORD=secret" \
@@ -31,8 +31,8 @@ services:
       - 8154:8154
     volumes:
       - ./go-data/etc:/etc/go
-      - ./go-data/lib:/var/lib/gocd-server/lib
-      - ./go-data/log:/var/log/gocd-server/log
+      - ./go-data/lib:/var/lib/gocd-server
+      - ./go-data/log:/var/log/gocd-server
     environment:
       - AGENT_KEY=VERYSECRETAGENTKEYLOLKTNXBYE
       - GOCD_API_USERNAME=apiuser
@@ -51,8 +51,8 @@ services:
       - 8154:8154
     volumes:
       - ./go-data/etc:/etc/go
-      - ./go-data/lib:/var/lib/gocd-server/lib
-      - ./go-data/log:/var/log/gocd-server/log
+      - ./go-data/lib:/var/lib/gocd-server
+      - ./go-data/log:/var/log/gocd-server
     environment:
       - AGENT_KEY=VERYSECRETAGENTKEYLOLKTNXBYE
       - GOCD_API_USERNAME=apiuser
