@@ -11,8 +11,8 @@ docker run -t  \
   -p 8153:8153 \
   -p 8154:8154 \
   -v $(pwd)/go-data/etc:/etc/go \
-  -v $(pwd)/go-data/lib:/var/lib/go-server \
-  -v $(pwd)/go-data/log:/var/log/go-server \
+  -v $(pwd)/go-data/lib:/var/lib/go-server/lib \
+  -v $(pwd)/go-data/log:/var/log/go-server/log \
   -d unibet/gocd-server
 ```
 
@@ -28,8 +28,8 @@ services:
       - 8154:8154
     volumes:
       - ./go-data/etc:/etc/go
-      - ./go-data/lib:/var/lib/gocd-server
-      - ./go-data/log:/var/log/gocd-server
+      - ./go-data/lib:/var/lib/gocd-server/lib
+      - ./go-data/log:/var/log/gocd-server/log
 ```
 
 docker-compose.yml that starts both the server and 1 agent:
@@ -44,8 +44,8 @@ services:
       - 8154:8154
     volumes:
       - ./go-data/etc:/etc/go
-      - ./go-data/lib:/var/lib/gocd-server
-      - ./go-data/log:/var/log/gocd-server
+      - ./go-data/lib:/var/lib/gocd-server/lib
+      - ./go-data/log:/var/log/gocd-server/log
     environment:
       - AGENT_KEY=secret-key
 
