@@ -11,7 +11,7 @@ RUN apk --no-cache --update add \
   xmlstarlet
 
 # Add go user and group
-RUN addgroup -g 1000 go && adduser -u 1000 -h /var/lib/go-server -H -S -G go go
+RUN addgroup -g 500 go && adduser -u 500 -h /var/lib/go-server -H -S -G go go
 
 # Install GoCD Server from zip file
 ARG GO_MAJOR_VERSION=16.11.0
