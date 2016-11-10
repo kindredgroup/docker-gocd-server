@@ -35,7 +35,7 @@ fi
 # Update it with the AGENT_KEY if needed, otherwise create a new clean config.
 if [ -f /etc/go/cruise-config.xml ]; then
   if [ ! -z "$AGENT_KEY" ]; then
-    xmlstarlet ed -u /cruise/server/@agentAutoRegisterKey -v ${AGENT_KEY} /etc/go/cruise-config.xml
+    xmlstarlet ed --inplace -u /cruise/server/@agentAutoRegisterKey -v ${AGENT_KEY} /etc/go/cruise-config.xml
   fi
 else
 cat >/etc/go/cruise-config.xml <<EOL
