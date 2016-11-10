@@ -31,8 +31,8 @@ services:
       - 8154:8154
     volumes:
       - ./go-data/etc:/etc/go
-      - ./go-data/lib:/var/lib/gocd-server
-      - ./go-data/log:/var/log/gocd-server
+      - ./go-data/lib:/var/lib/go-server
+      - ./go-data/log:/var/log/go-server
     environment:
       - AGENT_KEY=VERYSECRETAGENTKEYLOLKTNXBYE
       - GOCD_API_USERNAME=apiuser
@@ -51,8 +51,8 @@ services:
       - 8154:8154
     volumes:
       - ./go-data/etc:/etc/go
-      - ./go-data/lib:/var/lib/gocd-server
-      - ./go-data/log:/var/log/gocd-server
+      - ./go-data/lib:/var/lib/go-server
+      - ./go-data/log:/var/log/go-server
     environment:
       - AGENT_KEY=VERYSECRETAGENTKEYLOLKTNXBYE
       - GOCD_API_USERNAME=apiuser
