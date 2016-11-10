@@ -13,6 +13,9 @@ docker run -t  \
   -v $(pwd)/go-data/etc:/etc/go \
   -v $(pwd)/go-data/lib:/var/lib/go-server/lib \
   -v $(pwd)/go-data/log:/var/log/go-server/log \
+  -e "AGENT_KEY=VERYSECRETAGENTKEYLOLKTNXBYE" \
+  -e "GOCD_API_USERNAME=apiuser" \
+  -e "GOCD_API_PASSWORD=secret" \
   -d unibet/gocd-server
 ```
 
@@ -30,6 +33,10 @@ services:
       - ./go-data/etc:/etc/go
       - ./go-data/lib:/var/lib/gocd-server/lib
       - ./go-data/log:/var/log/gocd-server/log
+    environment:
+      - AGENT_KEY=VERYSECRETAGENTKEYLOLKTNXBYE
+      - GOCD_API_USERNAME=apiuser
+      - GOCD_API_PASSWORD=secret
 ```
 
 docker-compose.yml that starts both the server and 1 agent:
@@ -47,7 +54,7 @@ services:
       - ./go-data/lib:/var/lib/gocd-server/lib
       - ./go-data/log:/var/log/gocd-server/log
     environment:
-      - AGENT_KEY=secret-key
+      - AGENT_KEY=VERYSECRETAGENTKEYLOLKTNXBYE
 
   gocd-agent:
     image: unibet/gocd-agent
