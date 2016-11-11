@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Make all env vars available in go startup script
+export -a
+
 CRUISE_CONFIG=/etc/go/cruise-config.xml
 
 # We overwrite this file everytime we run the container, so all your local changes
