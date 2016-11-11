@@ -1,4 +1,5 @@
-FROM unibet/alpine-jre:7
+# We need edge for the xmlstarlet package right now.
+FROM alpine:edge
 MAINTAINER karel.bemelmans@unibet.com
 
 # Install more apk packages we might need
@@ -7,6 +8,7 @@ RUN apk --no-cache --update add \
   bash \
   curl \
   git \
+  openjdk7-jre \
   subversion \
   xmlstarlet \
   && rm -rf /var/cache/apk/*
