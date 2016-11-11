@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+CRUISE_CONFIG=/etc/go/cruise-config.xml
+
 # We overwrite this file everytime we run the container, so all your local changes
 # will be lost. If you need to change the logging, fork this repo or build your
 # own Docker image on top of this.
@@ -33,21 +35,18 @@ fi
 # Server config
 #
 # Update it with the AGENT_KEY if needed, otherwise create a new clean config.
-if [ -f /etc/go/cruise-config.xml ]; then
+if [ -f "$CRUISE_CONFIG" ]; then
   if [ ! -z "$AGENT_KEY" ]; then
     echo -n "Updating existing go-server configuration file with AGENT_KEY..."
-    xmlstarlet ed --inplace -u /cruise/server/@agentAutoRegisterKey -v ${AGENT_KEY} /etc/go/cruise-config.xml
+    xmlstarlet ed --inplace -u /cruise/server/@agentAutoRegisterKey -v ${AGENT_KEY} "$CRUISE_CONFIG"
   fi
 else
     echo -n "No go-server configuration file found, creating default config..."
 
-cat >/etc/go/cruise-config.xml <<EOL
+cat >$CRUISE_CONFIG <<EOL
 <?xml version="1.0" encoding="utf-8"?>
 <cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="87">
     <server agentAutoRegisterKey="${AGENT_KEY}">
-        <security>
-            <passwordFile path="/etc/go/passwd" />
-        </security>
     </server>
 </cruise>
 EOL
@@ -58,12 +57,27 @@ echo " Done!"
 # Create a password file that contains 1 entry for now.
 # We need this to be able to send API calls to the REST interface after the server has been booted
 if [ ! -z "$GOCD_API_USERNAME" ] && [ ! -z "$GOCD_API_PASSWORD" ]; then
+    echo -n "Creating local gocd user in password file... "
     if [ ! -f /etc/go/passwd ]; then
-        htpasswd -b -s -c /etc/go/passwd ${GOCD_API_USERNAME} ${GOCD_API_PASSWORD}
+        htpasswd -b -s -c /etc/go/passwd ${GOCD_API_USERNAME} ${GOCD_API_PASSWORD} >/dev/null
     else
-        htpasswd -b -s /etc/go/passwd ${GOCD_API_USERNAME} ${GOCD_API_PASSWORD}
+        htpasswd -b -s /etc/go/passwd ${GOCD_API_USERNAME} ${GOCD_API_PASSWORD} >/dev/null
     fi
     chown go:go /etc/go/passwd
+    echo " Done!"
+
+    set +e
+    xmlstarlet sel -T -t -v /cruise/server/security $CRUISE_CONFIG > /dev/null
+    if [ "$?" != "0" ]; then
+      xmlstarlet ed --inplace --subnode /cruise/server -t elem -n security $CRUISE_CONFIG
+    fi
+    xmlstarlet sel -T -t -v "/cruise/server/security/passwordFile/@path" $CRUISE_CONFIG >/dev/null
+    if [ "$?" != "0" ]; then
+      echo -n "Adding passwordfile configuration to cruise xml..."
+      xmlstarlet ed --inplace --subnode /cruise/server/security -t elem -n passwordFileTMP -i //passwordFileTMP -t attr -n path -v /etc/go/passwd -r //passwordFileTMP -v passwordFile $CRUISE_CONFIG
+      echo " Done!"
+    fi
+    set -e
 fi
 
 # start go.cd server as go user
