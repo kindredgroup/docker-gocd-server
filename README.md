@@ -66,6 +66,9 @@ services:
       - AGENT_RESOURCES=docker
       - AGENT_ENVIRONMENTS=prod
       - AGENT_HOSTNAME=deploy-agent-01
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
     links:
       - gocd-server
 ```
