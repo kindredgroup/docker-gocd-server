@@ -1,7 +1,7 @@
 version: '2'
 services:
   gocd-server:
-    image: unibet/gocd-server
+    build: .
     ports:
       - 8153:8153
       - 8154:8154
