@@ -22,7 +22,7 @@ ARG GO_BUILD_VERSION=4352
 ARG GO_VERSION="${GO_MAJOR_VERSION}-${GO_BUILD_VERSION}"
 ARG GOCD_SHA256=6ca2b62426167821f9e182f4c4173adb8cf86057b4d8deed8fb4fc29c2881ce5
 
-RUN curl -L --silent https://download.go.cd/binaries/${GO_VERSION}/generic/go-server-${GO_VERSION}.zip \
+RUN curl -L --silent https://download.gocd.io/binaries/${GO_VERSION}/generic/go-server-${GO_VERSION}.zip \
        -o /tmp/go-server.zip \
   && echo "${GOCD_SHA256}  /tmp/go-server.zip" | sha256sum -c - \
   && unzip /tmp/go-server.zip -d /usr/local \
