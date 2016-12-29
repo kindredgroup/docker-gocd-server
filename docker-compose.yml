@@ -22,5 +22,3 @@ services:
       - AGENT_RESOURCES=docker
       - AGENT_ENVIRONMENTS=prod
       - AGENT_HOSTNAME=deploy-agent-01
-    links:
-      - gocd-server
