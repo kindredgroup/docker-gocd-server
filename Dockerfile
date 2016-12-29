@@ -1,5 +1,5 @@
 # We need edge for the xmlstarlet package right now.
-FROM alpine:edge
+FROM alpine:3.5
 MAINTAINER karel.bemelmans@unibet.com
 
 # Install more apk packages we might need
