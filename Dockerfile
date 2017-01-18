@@ -51,5 +51,9 @@ VOLUME /var/log/go-server
 COPY ./docker-entrypoint.sh /
 RUN chown go:go /docker-entrypoint.sh && chmod 500 /docker-entrypoint.sh
 
+# With the upgrade to java8 we need to add this option to prevent curl and
+# other SSL options inside Go from breaking.
+ENV GO_SERVER_SYSTEM_PROPERTIES="-Dcom.sun.net.ssl.enableECC=false"
+
 USER go
 ENTRYPOINT ["/docker-entrypoint.sh"]
