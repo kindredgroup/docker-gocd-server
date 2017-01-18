@@ -83,6 +83,8 @@ if [ ! -z "$GOCD_API_USERNAME" ] && [ ! -z "$GOCD_API_PASSWORD" ]; then
     set -e
 fi
 
+export GO_SERVER_SYSTEM_PROPERTIES="-Dcom.sun.net.ssl.enableECC=false"
+
 # start go.cd server as go user
 echo "Starting go.cd server..."
 /usr/local/go-server/server.sh
