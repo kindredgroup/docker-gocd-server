@@ -6,9 +6,11 @@ MAINTAINER karel.bemelmans@unibet.com
 RUN apk --no-cache --update add \
   apache2-utils \
   bash \
+  ca-certificates \
   curl \
   git \
   openjdk8-jre \
+  rpm \
   subversion \
   xmlstarlet \
   && rm -rf /var/cache/apk/*
