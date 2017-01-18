@@ -82,13 +82,6 @@ if [ ! -z "$GOCD_API_USERNAME" ] && [ ! -z "$GOCD_API_PASSWORD" ]; then
     set -e
 fi
 
-# Plugins
-PLUGINS_DIR=/var/lib/go-server/plugins/external
-mkdir -p $PLUGINS_DIR
-
-# Slack notification plugin
-curl -fSL "https://github.com/ashwanthkumar/gocd-slack-build-notifier/releases/download/v1.4.0-RC6/gocd-slack-notifier-1.4.0-RC6.jar" -o $PLUGINS_DIR/gocd-slack-notifier-1.4.0-RC6.jar
-
 # start go.cd server as go user
 echo "Starting go.cd server..."
 /usr/local/go-server/server.sh
