@@ -17,10 +17,10 @@ RUN apk --no-cache --update add \
 RUN addgroup -g 500 go && adduser -u 500 -h /var/lib/go-server -H -S -G go go
 
 # Install GoCD Server from zip file
-ARG GO_MAJOR_VERSION=16.12.0
-ARG GO_BUILD_VERSION=4352
+ARG GO_MAJOR_VERSION=17.1.0
+ARG GO_BUILD_VERSION=4511
 ARG GO_VERSION="${GO_MAJOR_VERSION}-${GO_BUILD_VERSION}"
-ARG GOCD_SHA256=6ca2b62426167821f9e182f4c4173adb8cf86057b4d8deed8fb4fc29c2881ce5
+ARG GOCD_SHA256=caa68da42f5ad54c52331ff1f7ecbbe8ab48fab66600c23638f17e4ab5d77d24
 
 RUN curl -L --silent https://download.gocd.io/binaries/${GO_VERSION}/generic/go-server-${GO_VERSION}.zip \
        -o /tmp/go-server.zip \
