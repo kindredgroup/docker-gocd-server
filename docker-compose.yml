@@ -17,7 +17,7 @@ services:
   gocd-agent:
     image: unibet/gocd-agent
     environment:
-      - GO_SERVER_URL=https://gocd-server:8154/go
+      - GO_SERVER_URL=https://gocd-server:8154/go/
       - AGENT_KEY=VERYSECRETGOAGENTKEY
       - AGENT_RESOURCES=docker
       - AGENT_ENVIRONMENTS=prod
