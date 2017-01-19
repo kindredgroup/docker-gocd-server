@@ -7,14 +7,10 @@ RUN set -x \
   && yum -y install epel-release \
   && yum update -y \
   && yum install -y \
-    bash \
-    ca-certificates \
-    curl \
     git \
     httpd-tools \
     java-1.8.0-openjdk \
     subversion \
-    yum-utils \
     xmlstarlet \
     unzip \
   && yum clean all
