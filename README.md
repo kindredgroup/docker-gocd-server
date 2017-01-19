@@ -1,6 +1,6 @@
-# Alpine Linux GoCD Server Docker image
+# GoCD Server Docker image
 
-This is a minimal Alpine Linux Docker image for the GoCD Server that actually works with mounted volumes.
+This is a minimal Docker image for the GoCD Server that actually works with mounted volumes.
 
 ## Using this Docker image
 
