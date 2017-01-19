@@ -3,6 +3,8 @@ MAINTAINER karel.bemelmans@unibet.com
 
 # Install more apk packages we might need
 RUN set -x \
+  && yum clean all \
+  && yum -y install epel-release \
   && yum update -y \
   && yum install -y \
     apache2-utils \
