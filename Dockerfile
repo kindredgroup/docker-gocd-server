@@ -7,11 +7,11 @@ RUN set -x \
   && yum -y install epel-release \
   && yum update -y \
   && yum install -y \
-    apache2-utils \
     bash \
     ca-certificates \
     curl \
     git \
+    httpd-tools \
     java-1.8.0-openjdk \
     subversion \
     yum-utils \
