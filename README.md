@@ -45,7 +45,7 @@ docker-compose.yml that starts both the server and 1 agent:
 version: '2'
 services:
   gocd-server:
-    image: unibet/gocd-server
+    build: .
     ports:
       - 8153:8153
       - 8154:8154
@@ -54,23 +54,18 @@ services:
       - ./go-data/lib:/var/lib/go-server
       - ./go-data/log:/var/log/go-server
     environment:
-      - AGENT_KEY=VERYSECRETAGENTKEYLOLKTNXBYE
+      - AGENT_KEY=VERYSECRETGOAGENTKEY
       - GOCD_API_USERNAME=apiuser
       - GOCD_API_PASSWORD=secret
 
   gocd-agent:
     image: unibet/gocd-agent
     environment:
-      - GO_SERVER_URL=https://gocd-server:8154/go
-      - AGENT_KEY=secret-key
+      - GO_SERVER_URL=https://gocd-server:8154/go/
+      - AGENT_KEY=VERYSECRETGOAGENTKEY
       - AGENT_RESOURCES=docker
       - AGENT_ENVIRONMENTS=prod
       - AGENT_HOSTNAME=deploy-agent-01
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker
-    links:
-      - gocd-server
 ```
 
 ## Maintenance status
