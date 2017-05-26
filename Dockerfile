@@ -16,7 +16,12 @@ RUN set -x \
   && yum clean all
 
 # Add go user and group
-RUN groupadd --gid 500 go && adduser --shell /bin/bash --home /var/lib/go-server --no-create-home --uid 500 -g go go
+# You can override this when building the container, make sure this matches the
+# ownership of the mounted volumes!
+ARG GO_USER_ID=500
+ARG GO_GROUP_ID=500
+RUN groupadd --gid ${GO_GROUP_ID} go \
+  && adduser --shell /bin/bash --home /var/lib/go-server --no-create-home --uid ${GO_USER_ID} -g go go
 
 # Install GoCD Server from zip file
 ARG GO_MAJOR_VERSION=17.4.0

@@ -4,7 +4,16 @@ This is a minimal Docker image for the GoCD Server that actually works with moun
 
 ## Using this Docker image
 
-Example usage:
+*Important: Make sure the mounted folder (in the examples below the folder `go-data`) is owned by the same user id and group is as inside the container is defined!*
+
+Create the data folders and make sure the permissions are ok:
+
+```
+mkdir -p go-data/etc go-data/lib go-data/log
+chown -R 500:500 go-data
+```
+
+Start the GoCD Server container:
 
 ```
 docker run -t  \
@@ -19,7 +28,7 @@ docker run -t  \
   -d unibet/gocd-server
 ```
 
-docker-compose.yml:
+The above example as a `docker-compose.yml` file:
 
 ```
 version: '2'
@@ -39,7 +48,7 @@ services:
       - GOCD_API_PASSWORD=secret
 ```
 
-docker-compose.yml that starts both the server and 1 agent:
+A `docker-compose.yml` file that starts both the server and 1 agent:
 
 ```
 version: '2'
