@@ -1,0 +1,8 @@
+sudo: required
+language: generic
+services:
+	- docker
+script:
+	- docker-compose -f docker-compose-test.yml run integrationtest
+after_script:
+	- docker-compose -f docker-compose-test.yml down --rmi local
