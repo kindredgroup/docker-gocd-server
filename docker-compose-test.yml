@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  gocd-server:
+    build: .
+    environment:
+      - AGENT_KEY=VERYSECRETGOAGENTKEY
+      - GOCD_API_USERNAME=apiuser
+      - GOCD_API_PASSWORD=secret
+
+  integrationtest:
+    image: graze/bats
+    environment:
+      - GOCD_API_USERNAME=apiuser
+      - GOCD_API_PASSWORD=secret
+    volumes:
+      - ./tests:/tests
+    command:
+      - /tests
+    depends_on:
+    - gocd-server
+
