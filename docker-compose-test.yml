@@ -9,7 +9,7 @@ services:
       - GOCD_API_USERNAME=apiuser
       - GOCD_API_PASSWORD=secret
 
-  integrationtest:
+  sut:
     image: graze/bats
     environment:
       - GOCD_API_USERNAME=apiuser
