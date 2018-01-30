@@ -71,51 +71,11 @@ cat > $GO_CONFIG_DIR/logback.xml <<EOL
     scanPeriod="\${gocd.server.logback.scanPeriod:-5 seconds}"
 >
 
-  <appender name="ConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>
-        \${gocd.server.logback.defaultPattern:-%date{ISO8601} %-5level [%thread] %logger{0}:%line - %msg%n}
-      </pattern>
-    </encoder>
-  </appender>
-
-  <appender name="ShineConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>
-        \${gocd.server.logback.defaultPattern:-%date{ISO8601} %-5level [%thread] %logger{0}:%line - %msg%n}
-      </pattern>
-    </encoder>
-  </appender>
-
-  <appender name="WebRequestsConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>
-        \${gocd.server.logback.defaultPattern:-%date{ISO8601} %-5level [%thread] %logger{0}:%line - %msg%n}
-      </pattern>
-    </encoder>
-  </appender>
-
-  <appender name="PerformanceConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>
-        \${gocd.server.logback.defaultPattern:-%date{ISO8601} %-5level [%thread] %logger{0}:%line - %msg%n}
-      </pattern>
-    </encoder>
-  </appender>
-
   <root level="\${gocd.server.logback.root.level:-WARN}"/>
-<!--
-    <appender-ref ref="\${gocd.server.logback.root.appender:-ConsoleAppender}"/>
-  </root>
--->
 
   <logger name="com.thoughtworks.go" level="INFO"/>
 
   <logger name="com.thoughtworks.studios.shine" level="WARN"/>
-<!--
-    <appender-ref ref="ShineConsoleAppender"/>
-  </logger>
--->
 
   <logger name="com.thoughtworks.go.server.Rails" level="WARN"/>
 
