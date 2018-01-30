@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/unibet/docker-gocd-server.svg?branch=master)](https://travis-ci.org/unibet/docker-gocd-server)
+
 # GoCD Server Docker image
 
 This is a minimal Docker image for the GoCD Server that actually works with mounted volumes.
