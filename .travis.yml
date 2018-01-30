@@ -14,7 +14,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - docker-compose -f docker-compose-test.yml run sut
+  - docker-compose -f docker-compose-ci.yml run sut
 
 after_script:
-  - docker-compose -f docker-compose-test.yml down --rmi local
+  - docker-compose -f docker-compose-ci.yml down --rmi local
