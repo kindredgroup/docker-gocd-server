@@ -24,10 +24,10 @@ RUN groupadd --gid ${GO_GROUP_ID} go \
   && adduser --shell /bin/bash --home /var/lib/go-server --no-create-home --uid ${GO_USER_ID} -g go go
 
 # Install GoCD Server from zip file
-ARG GO_MAJOR_VERSION=19.1.0
-ARG GO_BUILD_VERSION=8469
+ARG GO_MAJOR_VERSION=19.2.0
+ARG GO_BUILD_VERSION=8641
 ARG GO_VERSION="${GO_MAJOR_VERSION}-${GO_BUILD_VERSION}"
-ARG GOCD_SHA256=49c90278a081f49b0d27769832c36529c9ecaefc8d0c61a528d2da727e7a4f73
+ARG GOCD_SHA256=ece4f633a5df2ffa8f468c474c1ec0dc4ff57f72b7256fb7c2e58fb97e8a5b8a
 
 RUN set -x && curl -L --silent https://download.gocd.org/binaries/${GO_VERSION}/generic/go-server-${GO_VERSION}.zip \
        -o /tmp/go-server.zip \
