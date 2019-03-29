@@ -27,7 +27,7 @@ RUN groupadd --gid ${GO_GROUP_ID} go \
 ARG GO_MAJOR_VERSION=19.2.0
 ARG GO_BUILD_VERSION=8641
 ARG GO_VERSION="${GO_MAJOR_VERSION}-${GO_BUILD_VERSION}"
-ARG GOCD_SHA256=cd7fd43022202ecee387cff803df41260574691178a7b26ae3a26a37b377deae
+ARG GOCD_SHA256=ece4f633a5df2ffa8f468c474c1ec0dc4ff57f72b7256fb7c2e58fb97e8a5b8a
 
 RUN set -x && curl -L --silent https://download.gocd.org/binaries/${GO_VERSION}/generic/go-server-${GO_VERSION}.zip \
        -o /tmp/go-server.zip \
