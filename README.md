@@ -4,6 +4,7 @@
 
 This is a minimal Docker image for the GoCD Server that actually works with mounted volumes.
 
+
 ## Using this Docker image
 
 *Important: Make sure the mounted folders (in the examples below the folder `go-data` and subfolders) are owned by the same user id and group is as inside the container is defined!*
