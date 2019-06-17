@@ -9,7 +9,7 @@ RUN set -x \
   && yum install -y \
     git \
     httpd-tools \
-    java-1.8.0-openjdk \
+    java-11-openjdk \
     subversion \
     xmlstarlet \
     unzip \
@@ -24,10 +24,10 @@ RUN groupadd --gid ${GO_GROUP_ID} go \
   && adduser --shell /bin/bash --home /var/lib/go-server --no-create-home --uid ${GO_USER_ID} -g go go
 
 # Install GoCD Server from zip file
-ARG GO_MAJOR_VERSION=19.3.0
-ARG GO_BUILD_VERSION=8959
+ARG GO_MAJOR_VERSION=19.5.0
+ARG GO_BUILD_VERSION=9272
 ARG GO_VERSION="${GO_MAJOR_VERSION}-${GO_BUILD_VERSION}"
-ARG GOCD_SHA256=4c830c81aa5cee884287cc279edfc4d3bf5a81b266e690fa079c7265dac76030
+ARG GOCD_SHA256=bd98be5cd537b1e9ffd797c5131d3106c21f460252918a3bb8823f74a9730f32
 
 RUN set -x && curl -L --silent https://download.gocd.org/binaries/${GO_VERSION}/generic/go-server-${GO_VERSION}.zip \
        -o /tmp/go-server.zip \
